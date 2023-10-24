@@ -1,0 +1,53 @@
+* TODO testes!
+	ver se dá pra manter estável(sem batidas) indeterminadamente
+* TODO simulaçao carros/sinal amarelo
+	quando o carro estiver diante do sinal amarelo devia acelerar. atualmente ele
+	aumenta a aceleração, mas na maoria dos casos já está na velocidade máxima,
+	então nao faz diferença.
+* TODO frontend
+	deixar bonito
+* TODO mobile
+	sugestão layout mobile:
+** mostra apenas uma tela por vez: ou blocos, ou canvas do cruzamento
+** botão 'switch' alterna entre duas telas (transição slide)
+* TODO botão 'reset'
+* TODO estruturar "gaveta" workspace
+* TODO classe crossroad (bg)
+* TODO subir em algum lugar (glitch!?)
+* TODO remover não usados do blockly
+* DONE sistema de espera
+	bloco do reloginho
+* DONE desenho da estrada pra um buffer uma unica vez
+* DONE separar arquivos semanticamente
+* DONE classe trafficLight
+* DONE classe car
+** lógica carrinhos:
+*** carros andam em fileiras que sao como trilhos
+*** fileira: uma posição /hard coded/, outra é um "progresso"
+*** atributos
+**** *progresso* incrementado com velocidade * delta
+**** *velocidade* incrementado com aceleracao
+**** *aceleracao* determinado pela logica
+**** *batido* caso encoste em outro carro
+*** cada fileira de carros é um array.
+*** cada carro só "enxerga" o carro a frente (index + 1)
+*** o carro mais adiantado da fileira é o da ponta do array (maior index) sempre
+*** se a distancia do carro da frente < X : diminui
+*** carros nao "exergam" nada das outras fileiras
+*** lógica farol:
+**** se antes do farol (progresso < X):
+***** "verde only": ignora farol
+***** "amarelo only": acelera
+***** "vermelho only": pára na faixa
+***** qualquer outro: ignora farol
+*** lógica colisao
+**** caso haja colisão os dois carros congelam
+* DONE colisão
+** classe estática
+** inicia pegando alguns consts (largura tela, largura carro, array lines...)
+** lista carros elegíveis à collisão (32% < progress < 68%)
+** loop por cada carro elegível. compara com todos os outros:
+*** se já /touchAnother/ -> skip
+*** se mesmo carro -> skip
+*** se mesmo sentido (vertical ou diagonal) -> skip
+*** senão, ativa /touchAnother/ nos dois
